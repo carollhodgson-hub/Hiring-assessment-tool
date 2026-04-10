@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faculty Hiring Evaluation Form</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 24px;
+      background: #f4f7fb;
+      font-family: "Segoe UI", Arial, sans-serif;
+      color: #243447;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #365f91, #28486d);
+      color: white;
+      padding: 28px 32px;
+    }
+
+    .header h1 {
+      margin: 0 0 6px 0;
+      font-size: 2rem;
+    }
+
+    .header p {
+      margin: 0;
+      opacity: 0.95;
+    }
+
+    .content {
+      padding: 28px;
+    }
+
+    .section {
+      border: 1px solid #d8e0ea;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      background: #fff;
+    }
+
+    .section h2 {
+      margin-top: 0;
+      color: #28486d;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #cfd8e3;
+      border-radius: 10px;
+      font-size: 14px;
+      box-sizing: border-box;
+      background: #fff;
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .category-block {
+      margin-top: 18px;
+      padding: 16px;
+      border: 1px solid #d8e0ea;
+      border-radius: 12px;
+      background: #eef4fb;
+    }
+
+    .category-block h3 {
+      margin-top: 0;
+      color: #28486d;
+    }
+
+    .question-list {
+      margin-top: 14px;
+    }
+
+    .question-box {
+      background: white;
+      border: 1px solid #dbe4ee;
+      border-left: 5px solid #365f91;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .question-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .question-text {
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .mini-btn {
+      border: none;
+      background: #a63d3d;
+      color: white;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .question-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 14px;
+      margin-top: 10px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      background: #365f91;
+      color: white;
+      padding: 11px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    button.secondary {
+      background: #6d7c8d;
+    }
+
+    .summary-box {
+      padding: 16px;
+      border: 1px solid #d8e0ea;
+      border-radius: 12px;
+      background: #fbfcfe;
+    }
+
+    .score-line {
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .recommendation {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .hire-strong {
+      background: #e8f5ec;
+      color: #20613b;
+    }
+
+    .hire {
+      background: #eaf1ff;
+      color: #214f9a;
+    }
+
+    .consider {
+      background: #fff6df;
+      color: #8a6200;
+    }
+
+    .no-hire {
+      background: #fdeaea;
+      color: #8f2f2f;
+    }
+
+    @media (max-width: 820px) {
+      .grid,
+      .question-grid,
+      .question-top {
+        grid-template-columns: 1fr;
+        display: block;
+      }
+
+      .question-top .mini-btn {
+        margin-top: 10px;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .container {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      .button-row,
+      .mini-btn {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Faculty Hiring Evaluation Form</h1>
+      <p>Interactive interview document for candidate review, notes, scoring, and PDF export.</p>
+    </div>
+
+    <div class="content">
+      <div class="section">
+        <h2>Candidate Information</h2>
+        <div class="grid">
+          <div>
+            <label for="facultyName">Faculty Name</label>
+            <input type="text" id="facultyName">
+          </div>
+
+          <div>
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber">
+          </div>
+
+          <div class="full">
+            <label for="emailAddress">Email Address</label>
+            <input type="email" id="emailAddress">
+          </div>
+
+          <div>
+            <label for="positionApplied">Position Applied For</label>
+            <select id="positionApplied">
+              <option value="">Select option</option>
+              <option>Anthropology Faculty</option>
+              <option>Geography Faculty</option>
+              <option>History Faculty</option>
+              <option>Political Science Faculty</option>
+              <option>Psychology Faculty</option>
+              <option>Sociology Faculty</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="facultyStatus">Faculty Status</label>
+            <select id="facultyStatus">
+              <option value="">Select option</option>
+              <option>Adjunct</option>
+              <option>Full-time</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="facultyEducation">Faculty Education</label>
+            <select id="facultyEducation">
+              <option value="">Select option</option>
+              <option>Master’s degree in discipline</option>
+              <option>Master’s degree in another discipline with 18 graduate credit hours in discipline prefix courses</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="yearsTeaching">Number of Years Teaching</label>
+            <select id="yearsTeaching">
+              <option value="">Select option</option>
+              <option>1–5</option>
+              <option>6–10</option>
+              <option>11–15</option>
+              <option>16–20</option>
+              <option>21 or more</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="communityCollegeExperience">Experience Teaching in Community College Setting</label>
+            <select id="communityCollegeExperience">
+              <option value="">Select option</option>
+              <option>Yes</option>
+              <option>No</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="locationType">Location</label>
+            <select id="locationType">
+              <option value="">Select option</option>
+              <option>In-state local</option>
+              <option>In-state not local</option>
+              <option>Out of state</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Interview Question Areas</h2>
+        <div id="categoriesContainer"></div>
+
+        <div class="button-row">
+          <button type="button" onclick="calculateScore()">Calculate Recommendation</button>
+          <button type="button" class="secondary" onclick="window.print()">Save / Download as PDF</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Evaluation Summary</h2>
+        <div class="summary-box">
+          <div class="score-line">Total Score: <span id="totalScore">0</span></div>
+          <div class="score-line">Average Score: <span id="averageScore">0.00</span></div>
+          <div class="score-line">Questions Scored: <span id="questionsScored">0</span></div>
+          <div id="recommendationBox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const categories = [
+      {
+        title: "1. Critical Thinking, Decision Making, Objective Analysis",
+        questions: [
+          "Describe a time you had to make a difficult instructional decision.",
+          "How do you evaluate student work objectively?",
+          "Tell us about a time you identified a problem and developed a solution.",
+          "How do you encourage critical thinking in class?",
+          "How do you use evidence or data to make instructional decisions?"
+        ]
+      },
+      {
+        title: "2. Experience Teaching Online and Classroom / Fostering Student Growth",
+        questions: [
+          "Describe your experience teaching both online and face-to-face courses.",
+          "How do you build engagement in an online class?",
+          "What strategies do you use to support student growth?",
+          "How do you adapt instruction for different learners?",
+          "What do you find most rewarding about teaching community college students?"
+        ]
+      },
+      {
+        title: "3. General Compliance",
+        questions: [
+          "How do you ensure compliance with course policies and deadlines?",
+          "What is your understanding of academic integrity and FERPA?",
+          "How do you maintain accurate grading and records?",
+          "Describe your experience using required college systems.",
+          "How do you stay informed about policy updates?"
+        ]
+      },
+      {
+        title: "4. Conflict Management, Interpersonal Skills, Adaptability, Resilience",
+        questions: [
+          "Describe a time you managed a conflict with a student or colleague.",
+          "How do you handle feedback or unexpected change?",
+          "Tell us about a time you adapted quickly to a challenge.",
+          "How do you maintain professionalism in difficult situations?",
+          "What interpersonal strengths do you bring to a department?"
+        ]
+      },
+      {
+        title: "5. Time Optimization",
+        questions: [
+          "How do you balance grading, preparation, and communication?",
+          "Describe a system you use to stay organized.",
+          "How do you manage multiple responsibilities during a busy semester?",
+          "Tell us about a time you handled competing priorities.",
+          "How do you structure your time for online versus face-to-face teaching?"
+        ]
+      }
+    ];
+
+    function createCategoryBlocks() {
+      const container = document.getElementById("categoriesContainer");
+      container.innerHTML = "";
+
+      categories.forEach((category, index) => {
+        const block = document.createElement("div");
+        block.className = "category-block";
+
+        const title = document.createElement("h3");
+        title.textContent = category.title;
+
+        const label = document.createElement("label");
+        label.setAttribute("for", "categorySelect" + index);
+        label.textContent = "Choose a question";
+
+        const select = document.createElement("select");
+        select.id = "categorySelect" + index;
+
+        const defaultOption = document.createElement("option");
+        defaultOption.value = "";
+        defaultOption.textContent = "Select a question";
+        select.appendChild(defaultOption);
+
+        category.questions.forEach((question) => {
+          const option = document.createElement("option");
+          option.value = question;
+          option.textContent = question;
+          select.appendChild(option);
+        });
+
+        select.addEventListener("change", function () {
+          addQuestion(index, this);
+        });
+
+        const list = document.createElement("div");
+        list.className = "question-list";
+        list.id = "questionList" + index;
+
+        block.appendChild(title);
+        block.appendChild(label);
+        block.appendChild(select);
+        block.appendChild(list);
+        container.appendChild(block);
+      });
+    }
+
+    function addQuestion(categoryIndex, selectEl) {
+      const questionText = selectEl.value;
+      if (!questionText) return;
+
+      const list = document.getElementById("questionList" + categoryIndex);
+      const questionId = "q_" + categoryIndex + "_" + Date.now() + "_" + Math.floor(Math.random() * 1000);
+
+      const box = document.createElement("div");
+      box.className = "question-box";
+      box.setAttribute("data-question-id", questionId);
+
+      const top = document.createElement("div");
+      top.className = "question-top";
+
+      const textDiv = document.createElement("div");
+      textDiv.className = "question-text";
+      textDiv.textContent = questionText;
+
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "mini-btn";
+      removeBtn.textContent = "Remove Question";
+      removeBtn.onclick = function () {
+        removeQuestion(questionId);
+      };
+
+      top.appendChild(textDiv);
+      top.appendChild(removeBtn);
+
+      const grid = document.createElement("div");
+      grid.className = "question-grid";
+
+      const ratingWrap = document.createElement("div");
+      const ratingLabel = document.createElement("label");
+      ratingLabel.textContent = "Rating";
+      ratingLabel.setAttribute("for", "score_" + questionId);
+
+      const ratingSelect = document.createElement("select");
+      ratingSelect.id = "score_" + questionId;
+      ratingSelect.className = "score-input";
+
+      const options = [
+        ["", "Select rating"],
+        ["1", "1 - Poor"],
+        ["2", "2 - Below Expectations"],
+        ["3", "3 - Meets Expectations"],
+        ["4", "4 - Strong"],
+        ["5", "5 - Excellent"]
+      ];
+
+      options.forEach(function(item) {
+        const option = document.createElement("option");
+        option.value = item[0];
+        option.textContent = item[1];
+        ratingSelect.appendChild(option);
+      });
+
+      ratingWrap.appendChild(ratingLabel);
+      ratingWrap.appendChild(ratingSelect);
+
+      const commentWrap = document.createElement("div");
+      const commentLabel = document.createElement("label");
+      commentLabel.textContent = "Comments / Candidate Response Notes";
+      commentLabel.setAttribute("for", "comment_" + questionId);
+
+      const commentBox = document.createElement("textarea");
+      commentBox.id = "comment_" + questionId;
+      commentBox.placeholder = "Enter notes here...";
+
+      commentWrap.appendChild(commentLabel);
+      commentWrap.appendChild(commentBox);
+
+      grid.appendChild(ratingWrap);
+      grid.appendChild(commentWrap);
+
+      box.appendChild(top);
+      box.appendChild(grid);
+
+      list.appendChild(box);
+      selectEl.value = "";
+    }
+
+    function removeQuestion(questionId) {
+      const box = document.querySelector('[data-question-id="' + questionId + '"]');
+      if (box) box.remove();
+      calculateScore();
+    }
+
+    function calculateScore() {
+      const scores = document.querySelectorAll(".score-input");
+      let total = 0;
+      let count = 0;
+
+      scores.forEach(function(score) {
+        if (score.value !== "") {
+          total += parseInt(score.value, 10);
+          count++;
+        }
+      });
+
+      const average = count > 0 ? total / count : 0;
+
+      document.getElementById("totalScore").textContent = total;
+      document.getElementById("averageScore").textContent = average.toFixed(2);
+      document.getElementById("questionsScored").textContent = count;
+
+      const recommendationBox = document.getElementById("recommendationBox");
+      recommendationBox.innerHTML = "";
+
+      const recommendation = document.createElement("div");
+      recommendation.className = "recommendation";
+
+      if (count === 0) {
+        recommendation.textContent = "No recommendation available until at least one question is scored.";
+        recommendation.classList.add("consider");
+      } else if (average >= 4.5) {
+        recommendation.textContent = "Recommendation: Hire — Highly Recommended";
+        recommendation.classList.add("hire-strong");
+      } else if (average >= 3.5) {
+        recommendation.textContent = "Recommendation: Hire — Recommended";
+        recommendation.classList.add("hire");
+      } else if (average >= 2.5) {
+        recommendation.textContent = "Recommendation: Borderline / Consider with Reservations";
+        recommendation.classList.add("consider");
+      } else {
+        recommendation.textContent = "Recommendation: Do Not Hire";
+        recommendation.classList.add("no-hire");
+      }
+
+      recommendationBox.appendChild(recommendation);
+    }
+
+    createCategoryBlocks();
+  </script>
+</body>
+</html>
